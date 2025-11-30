@@ -1580,7 +1580,11 @@ variable "ingress_nginx_helm_version" {
 
 variable "ingress_nginx_helm_values" {
   type        = any
-  default     = {}
+  default     = {
+    controller = {
+      allowSnippetAnnotations = true
+    }
+  }
   description = "Custom Helm values for the Ingress NGINX Controller chart deployment. These values will merge with and will override the default values provided by the Ingress NGINX Controller Helm chart."
 }
 
@@ -1636,7 +1640,9 @@ variable "ingress_nginx_service_external_traffic_policy" {
 
 variable "ingress_nginx_config" {
   type        = any
-  default     = {}
+  default     = {
+    annotations-risk-level: "Critical"
+  }
   description = "Global configuration passed to the ConfigMap consumed by the nginx controller. (Reference: https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/)"
 }
 
@@ -1866,4 +1872,17 @@ variable "prometheus_operator_crds_version" {
   type        = string
   default     = "v0.87.1" # https://github.com/prometheus-operator/prometheus-operator
   description = "Specifies the version of the Prometheus Operator Custom Resource Definitions (CRDs) to deploy."
+}
+
+# Volume Snapshot CRDs
+variable "volume_snapshot_crds_enabled" {
+  type        = bool
+  default     = false
+  description = "Enables the Kubernetes Volume Snapshot Custom Resource Definitions (CRDs) deployment."
+}
+
+variable "volume_snapshot_crds_version" {
+  type        = string
+  default     = "v8.4.0" # https://github.com/kubernetes-csi/external-snapshotter
+  description = "Specifies the version of the Kubernetes Volume Snapshot Custom Resource Definitions (CRDs) to deploy."
 }

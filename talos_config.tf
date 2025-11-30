@@ -35,6 +35,11 @@ locals {
     var.gateway_api_crds_enabled ? [
       "https://github.com/kubernetes-sigs/gateway-api/releases/download/${var.gateway_api_crds_version}/${var.gateway_api_crds_release_channel}-install.yaml"
     ] : [],
+    var.volume_snapshot_crds_enabled ? [
+      "https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/${var.volume_snapshot_crds_version}/client/config/crd/snapshot.storage.k8s.io_volumesnapshotclasses.yaml",
+      "https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/${var.volume_snapshot_crds_version}/client/config/crd/snapshot.storage.k8s.io_volumesnapshots.yaml",
+      "https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/${var.volume_snapshot_crds_version}/client/config/crd/snapshot.storage.k8s.io_volumesnapshotcontents.yaml"
+    ] : [],
     var.talos_extra_remote_manifests != null ? var.talos_extra_remote_manifests : []
   )
 
