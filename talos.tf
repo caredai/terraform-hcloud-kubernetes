@@ -562,7 +562,8 @@ resource "terraform_data" "synchronize_manifests" {
   triggers_replace = [
     nonsensitive(sha1(jsonencode(local.talos_inline_manifests))),
     var.talos_ccm_version,
-    var.prometheus_operator_crds_version
+    var.prometheus_operator_crds_version,
+    var.volume_snapshot_crds_version
   ]
 
   provisioner "local-exec" {

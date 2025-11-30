@@ -28,6 +28,11 @@ locals {
   talos_manifests = concat(
     var.talos_ccm_enabled ? ["https://raw.githubusercontent.com/siderolabs/talos-cloud-controller-manager/${var.talos_ccm_version}/docs/deploy/cloud-controller-manager-daemonset.yml"] : [],
     var.prometheus_operator_crds_enabled ? ["https://github.com/prometheus-operator/prometheus-operator/releases/download/${var.prometheus_operator_crds_version}/stripped-down-crds.yaml"] : [],
+    var.volume_snapshot_crds_enabled ? [
+      "https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/${var.volume_snapshot_crds_version}/client/config/crd/snapshot.storage.k8s.io_volumesnapshotclasses.yaml",
+      "https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/${var.volume_snapshot_crds_version}/client/config/crd/snapshot.storage.k8s.io_volumesnapshots.yaml",
+      "https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/${var.volume_snapshot_crds_version}/client/config/crd/snapshot.storage.k8s.io_volumesnapshotcontents.yaml"
+    ] : [],
     var.talos_extra_remote_manifests != null ? var.talos_extra_remote_manifests : []
   )
 

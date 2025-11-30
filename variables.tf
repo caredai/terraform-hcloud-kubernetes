@@ -1698,3 +1698,16 @@ variable "prometheus_operator_crds_version" {
   default     = "v0.87.0" # https://github.com/prometheus-operator/prometheus-operator
   description = "Specifies the version of the Prometheus Operator Custom Resource Definitions (CRDs) to deploy."
 }
+
+# Volume Snapshot CRDs
+variable "volume_snapshot_crds_enabled" {
+  type        = bool
+  default     = false
+  description = "Enables the Kubernetes Volume Snapshot Custom Resource Definitions (CRDs) deployment."
+}
+
+variable "volume_snapshot_crds_version" {
+  type        = string
+  default     = "v8.4.0" # https://github.com/kubernetes-csi/external-snapshotter
+  description = "Specifies the version of the Kubernetes Volume Snapshot Custom Resource Definitions (CRDs) to deploy."
+}
